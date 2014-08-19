@@ -12,6 +12,7 @@ before { @user = User.new(name: "Example User", email: "user@example.com",
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
 
   it { should be_valid }
@@ -108,5 +109,9 @@ before { @user = User.new(name: "Example User", email: "user@example.com",
     it { should be_invalid }
   end
 
+  describe "remember token" do
+    before { @user.save }
+    its(:remember_token) { should_not be_blank }
+  end
 
 end
